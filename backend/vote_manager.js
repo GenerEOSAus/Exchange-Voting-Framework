@@ -48,7 +48,7 @@ class VoteManager {
     static voteAction(actor, perm, proxy, prods) {
         return {
             account: 'eosio',
-            name: 'voteprodtucer',
+            name: 'voteproducer',
             authorization: [{
                 actor: actor,
                 permission: perm,
