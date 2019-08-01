@@ -1,0 +1,29 @@
+{
+  "endpoint": "https://api.eosrio.io",
+  "chain_id": "aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906",
+  "proxy_min_votes": 40000,
+  "proxy_registry": "regproxyinfo",
+  "proxy_fetch_interval": 3600,
+  "auth": {
+    "enabled": true,
+    "user": "demo",
+    "password": "demo"
+  },
+  "accounts": [
+    {
+      "account": "riocoldwllt1",
+      "permission": "vote",
+      "private_key": "5J9wGRMk2uq2B9w2ZdrE4tjeT8XAEKb5ggnbqN5KuTint6ZZ9ah"
+    },
+    {
+      "account": "riocoldwllt2",
+      "permission": "vote",
+      "private_key": "5J9wGRMk2uq2B9w2ZdrE4tjeT8XAEKb5ggnbqN5KuTint6ZZ9ah"
+    },
+    {
+      "account": "riocoldwllt3",
+      "permission": "vote",
+      "private_key": "5J9wGRMk2uq2B9w2ZdrE4tjeT8XAEKb5ggnbqN5KuTint6ZZ9ah"
+    }
+  ]
+}
