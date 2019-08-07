@@ -27,7 +27,7 @@ The provided user interface sample code is recommended to be integrated and bran
 
 ### Communication with voting backend system
 
-The voting frontend communicates with the vote management system (let&#39;s just call it &#39;backend&#39;) via REST calls. As the backend runs on a separate instance than the rest of your exchange portal backend systems, OAuth authentication is required between those two components before any data can be exchanged via REST calls. (For further details see the documentation of the backend system.) This is to ensure distinction with an exchange&#39;s critical backend infrastructure. The isolated / containerised voting backend system will only require access to a user&#39;s account UID, staked EOS balance and current block producer / proxy vote without direct access to user records (balance transfers / modifications) on the exchange.
+The voting frontend communicates with the vote management system (let’s just call it ‘backend’) via REST calls. As the backend runs on a separate instance than the rest of your exchange portal backend systems, some kind of authentication (e.g. JWT or OAuth) is required between those two components before any data can be exchanged via REST calls. (For further details see the documentation of the backend system.) This is to ensure distinction with an exchange’s critical backend infrastructure. The isolated / containerised voting backend system will only require access to a user’s account UID, staked EOS balance and current block producer / proxy vote without direct access to user records (balance transfers / modifications) on the exchange. Those details will be stored within a separate standalone database so no direct access to the central exchange database is required.
 
 ### Landing page (EOS governance education)
 
@@ -56,12 +56,12 @@ Similarly other exchange backends systems which might need to push updated user 
 
 Parameters:
 
-- --id
-- --secret
+- id
+- secret
 
 Returns:
 
-- --Authentication token
+- Authentication token
 
 #### GET User Vote
 
@@ -69,16 +69,16 @@ This method will be called by the voting UI to determine how the user previously
 
 Header:
 
-- --Authentication token
+- Authentication token
 
 Parameters:
 
-- --userID
+- userID
 
 Returns:
 
-- --ProxyVote (boolean)
-- --List of BPs (or proxy) previously voted for
+- ProxyVote (boolean)
+- List of BPs (or proxy) previously voted for
 
 #### POST User Vote
 
@@ -86,17 +86,17 @@ This method will be called by the voting UI when the user submits their vote. It
 
 Header:
 
-- --Authentication token
+- Authentication token
 
 Parameters:
 
-- --userID
-- --ProxyVote (boolean)
-- --List of up to 30 BP account names (or 1 proxy account name)
+- userID
+- ProxyVote (boolean)
+- List of up to 30 BP account names (or 1 proxy account name)
 
 Returns:
 
-- --n/a
+- n/a
 
 #### POST User Details
 
@@ -104,63 +104,108 @@ This method needs to be called by your exchange backend dealing with buy/sell or
 
 Header:
 
-- --Authentication token
+- Authentication token
 
 Parameters:
 
-- --userID
-- --EOS owned
+- userID
+- EOS owned
 
 Returns:
 
-- --n/a
+- n/a
 
 #### GET Producer List
 
 This method will be called by the voting UI to receive a list of currently registered BPs to render in the voting table.
 
+URL: '/api/producers'
+
 Header:
 
-- --Authentication token
+- Authentication token
 
 Parameters:
 
-- --n/a
+- n/a
 
 Returns:
 
-- --Array:
-
--
-  - --BP logo URL
-  - --BP name
-  - --BP website
-  - --BP global total votes
-  - --BP global vote percentage
+- Array:
+  - BP logo URL
+  - BP name
+  - BP website
+  - BP global total votes
+  - BP global vote percentage
 
 #### GET Proxy List
 
+Returns a list of all proxies that should be displayed in the UI for users to choose from. This list can be 'hard-coded' via the config file. If no proxies are listed in the configuration, all registered proxies with proxy information will be loaded from the Aloha producer details table.
+
+URL: '/api/proxies'
+
 Header:
 
-- --Authentication token
+- Authentication token
 
 Parameters:
 
-- --n/a
+- n/a
 
 Returns:
 
-- --Array:
+- Array:
+  - Proxy logo URL
+  - Proxy name
+  - Proxy website
+  - Proxy background
+  - Proxy philosophy
+  - Proxy total votes delegated
+  - List: BPs voted for
 
--
-  - --Proxy logo URL
-  - --Proxy name
-  - --Proxy website
-  - --Proxy background
-  - --Proxy philosophy
-  - --Proxy total votes delegated
-  - --List: BPs voted for
 
+#### GET Voting Statistics
+
+Returns information about the current voting status to be displayed in the admin interface
+
+URL: '/api/statistics'
+
+Header:
+
+- Authentication token
+
+Parameters:
+
+- n/a
+
+Returns:
+
+- Array:
+  - Map: BPs voted for and total votes received (ordered by total votes decending)
+  - Number of users that participated in voting
+  - Total EOS owned by users who voted
+  - Total EOS owned by all users of the exchange
+
+
+#### GET Exchange Wallet Details
+
+Returns a list of all configured exchange wallet that are used to vote with. Details returned includes how much EOS is stored in each wallet and which BPs are currently voted for with each wallet.
+
+URL: '/api/statistics'
+
+Header:
+
+- Authentication token
+
+Parameters:
+
+- n/a
+
+Returns:
+
+- Array:
+  - Array: Cold wallet address, total staked EOS, List of BPs voted for
+  
 
 ## Appendix
 
@@ -182,33 +227,33 @@ The following are a set of commands to setup/remove as well as link/unlink custo
 
 **Set a new custom voting permission**
 
-`cleos set account permission \&lt;exchange_account\&gt; \&lt;custom_named_voting_permission\&gt; &#39;{&quot;threshold&quot;:1, &quot;keys&quot;: [{&quot;key&quot;:&quot;&quot;,&quot;weight&quot;:1}]}&#39; active -p \&lt;exchange_account\&gt; `
+`cleos set account permission **exchange_account** **custom_named_voting_permission** &#39;{&quot;threshold&quot;:1, &quot;keys&quot;: [{&quot;key&quot;:&quot;&quot;,&quot;weight&quot;:1}]}&#39; active -p **exchange_account** `
 
 Note: You can save the json string defining the authority to a file for easy reuse
 
 To have contract code vote on behalf of the exchange voting account
 
-`cleos set account permission \&lt;exchange_account\&gt; \&lt;custom_named_voting_permission\&gt; \&lt;contract\&gt;@eosio.code active -p \&lt;exchange_account\&gt;`
+`cleos set account permission **exchange_account** **custom_named_voting_permission** **contract**@eosio.code active -p **exchange_account**`
 
-**Remove an existing permission (don&#39;t forget to unlink the permission first!)**
+**Remove an existing permission (don't forget to unlink the permission first!)**
 
-`cleos set account permission \&lt;exchange_account\&gt; \&lt;custom_named_voting_permission\&gt; NULL active -p \&lt;exchange_account\&gt;`
+`cleos set account permission **exchange_account** **custom_named_voting_permission** NULL active -p **exchange_account**`
 
 **Link the custom named voting permission to vote action**
 
-`cleos set action permission \&lt;exchange_account\&gt; eosio voteproducer \&lt;custom_named_voting_permission\&gt; `
+`cleos set action permission **exchange_account** eosio voteproducer **custom_named_voting_permission** `
 
 **Remove|unlink the permission from the vote action**
 
-`cleos set action permission \&lt;exchange_account\&gt; eosio voteproducer NULL`
+`cleos set action permission **exchange_account** eosio voteproducer NULL`
 
 **Vote for a bp/proxy**
 
-`cleos system voteproducer [prods|proxy] \&lt;account_name\&gt; \&lt;registered bp/proxy_name\&gt;`
+`cleos system voteproducer [prods|proxy] **account_name** **registered bp/proxy_name**`
 
 Note
 
-Replace \&lt;\&gt; with the associated account\_name/custom voting permission name
+Replace **** with the associated account\_name/custom voting permission name
 
 Choose one from among [a|b]
 
