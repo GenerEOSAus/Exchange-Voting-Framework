@@ -1,24 +1,28 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Router } from 'react-router';
+import { Route, Switch } from 'react-router-dom'
+import history from './history';
 import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import WelcomePage from './pages/WelcomePage';
 import AuthContextProvider from './contexts/AuthContext';
 import PageTemplate from './components/PageTemplate';
+import ProxyVoteList from './components/ProxyVoteList';
 
 function App() {
   return (
-    <AuthContextProvider>
-      <PageTemplate>
-        <Router>
+    <Router history={history}>
+      <AuthContextProvider>
+        <PageTemplate>
           <Switch>
-            <Route path="/login" component={LoginPage} />
-            <ProtectedRoute path="/" component={WelcomePage} />
-            
+            <Route exact path="/login" component={LoginPage} />
+            <ProtectedRoute  exact path="/" component={WelcomePage} />
+            <ProtectedRoute  exact path="/home" component={WelcomePage} />          
+            <Route  exact path="/vote" component={ProxyVoteList} />
           </Switch>
-        </Router>
-      </PageTemplate>
-    </AuthContextProvider>
+        </PageTemplate>
+      </AuthContextProvider>
+    </Router>
   );
 }
 

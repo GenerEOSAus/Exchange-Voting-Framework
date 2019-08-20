@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import history from '../history';
 
 export const AuthContext = createContext();
 
@@ -6,13 +7,15 @@ const AuthContextProvider = (props) => {
     const [authInfo, setAuthInfo] = useState({
         isAuthenticated: false
     })
-    const doLogin = (history=undefined) =>{
+    const doLogin = () =>{
         setAuthInfo({isAuthenticated: true});
-        if(history) history.push('/welcome');
+        history.push('/home');
+        
     }
-    const doLogout = (history=undefined) =>{
+    const doLogout = () =>{
         setAuthInfo({isAuthenticated: false});
-        if(history) history.push('/login');
+        console.log('logout history', history);
+        history.push('/login');
     }
 
     return ( 
