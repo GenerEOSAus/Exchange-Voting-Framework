@@ -4,7 +4,7 @@ import { AuthContext } from '../contexts/AuthContext';
 
 
 const ProtectedRoute = (props) => {
-    const isAuthenticated = useContext(AuthContext); 
+    const {authenticated} = useContext(AuthContext); 
     //console.log('abc', isAuthenticated);
     const { component: Component, ...otherProps } = props
   
@@ -15,8 +15,8 @@ const ProtectedRoute = (props) => {
     
 
     const handleRender = (props) => {
-      console.log('authenticated', isAuthenticated);
-      return isAuthenticated === true ? 
+      console.log('authenticated', authenticated);
+      return authenticated? 
         <Component {...props} /> :
         <Redirect to='/login' />;
     }
