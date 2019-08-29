@@ -2,12 +2,13 @@ import React from 'react';
 import { Router } from 'react-router';
 import { Route, Switch } from 'react-router-dom'
 import history from './history';
-import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './components/ProtectedRoute';
-import WelcomePage from './pages/WelcomePage';
 import AuthContextProvider from './contexts/AuthContext';
 import PageTemplate from './components/PageTemplate';
-import ProxyVoteList from './components/ProxyVoteList';
+
+import LoginPage from './pages/LoginPage';
+import WelcomePage from './pages/WelcomePage';
+import ProxyPage from './pages/ProxyPage';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
             <Route exact path="/login" component={LoginPage} />
             <ProtectedRoute  exact path="/" component={WelcomePage} />
             <ProtectedRoute  exact path="/home" component={WelcomePage} />          
-            <Route  exact path="/vote" component={ProxyVoteList} />
+            <Route  exact path="/vote" component={ProxyPage} />
           </Switch>
         </PageTemplate>
       </AuthContextProvider>

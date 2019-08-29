@@ -1,0 +1,31 @@
+
+.flag-icon {
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    position: relative;
+    display: inline-block;
+    width: 1em;
+    line-height: 1em; 
+}
+
+.flag-icon::before{
+    content: '\00a0';
+}
+
+.flag-icon-au {
+    background-image: url('/images/flag-icons/au.svg')
+}
+
+
+.flag-icon-cn {
+    background-image: url('/images/flag-icons/cn.svg')
+}
+
+.flag-icon-jp {
+    background-image: url('/images/flag-icons/jp.svg')
+}
+
+.flag-icon-vg {
+    background-image: url('/images/flag-icons/vg.svg')
+}

@@ -29,3 +29,15 @@ code {
   font-weight: bold;
   color: #fff;
 }
+
+.section-left {
+  float: left;
+  width: 48%;
+  min-width: 300px;
+}
+
+.section-right {
+  float: right;
+  width: 48%;
+  min-width: 300px;
+}
