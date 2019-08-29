@@ -11,7 +11,9 @@ const ProxyContextProvider = (props) => {
             //...
             { id: 4, rank: 8, logo: 'https://www.alohaeos.com/media/2018/06/14/p/s/1/bitfinexeos1/X8Dr-2.png', name: 'Bitfinex', country: 'VG'},
             //...
-            { id: 5, rank: 69, logo: 'https://www.alohaeos.com/media/2018/06/14/p/b/p/eosphereiobp/m3doB-2.png', name: 'EOSphere', country: 'AU'}
+            { id: 5, rank: 69, logo: 'https://www.alohaeos.com/media/2018/06/14/p/b/p/eosphereiobp/m3doB-2.png', name: 'EOSphere', country: 'AU'},
+            //...
+            { id: 6, rank: 73, logo: 'https://www.alohaeos.com/media/2018/06/14/p/o/s/aus1genereos/06nJ-2.png', name: 'GenerEOS', country: 'AU'},
         ]
     );
     const [selectedProxyIdx, setSelectedProxyIdx] = useState(null);
