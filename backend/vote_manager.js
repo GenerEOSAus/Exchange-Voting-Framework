@@ -1,7 +1,7 @@
-import {JsSignatureProvider} from "eosjs/dist/eosjs-jssig";
+const {JsSignatureProvider} = require("eosjs/dist/eosjs-jssig");
 
 const ecc = require('eosjs-ecc');
-const {Api, JsonRpc, RpcError} = require('eosjs');
+const {Api, RpcError} = require('eosjs');
 
 class VoteManager {
     #accounts = [];
@@ -9,7 +9,6 @@ class VoteManager {
     #ready = false;
     rpc = null;
     api = null;
-
 
     constructor(configuration, rpc) {
         this.rpc = rpc;

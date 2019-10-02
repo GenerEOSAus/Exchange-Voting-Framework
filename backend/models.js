@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 mongoose.set('useCreateIndex', true);
-mongoose.connect('mongodb://localhost/EXVS', {useNewUrlParser: true}).then((conn) => {
+mongoose.connect('mongodb://localhost/EXVS', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then((conn) => {
     console.log('Database Connected');
 });
 
