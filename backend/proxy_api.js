@@ -14,11 +14,13 @@ class ProxyAPI {
         this.minVotes = configuration['proxy_min_votes'];
         this.proxyRegistry = configuration['proxy_registry'];
         this.updateInterval = configuration['proxy_fetch_interval'];
-        this.#lastUpdateTime = localStorage.getItem('proxy_list_update');
+        if(localStorage.getItem('proxy_list_update')) {
+            this.#lastUpdateTime = parseInt(localStorage.getItem('proxy_list_update'));
+        }
         this.#rank = JSON.parse(localStorage.getItem('proxies'));
-        console.log(Date.now() - parseInt(this.#lastUpdateTime));
-        if (Date.now() - parseInt(this.#lastUpdateTime) > (1000 * this.updateInterval)) {
+        if (Date.now() - this.#lastUpdateTime > (1000 * this.updateInterval)) {
             // Requires an update
+            console.log('Updating proxy list...');
             this.update().catch(console.log);
         }
     }
@@ -81,9 +83,9 @@ class ProxyAPI {
             }
         }
         tempArray.sort((a, b) => b.votes - a.votes);
-        console.log(`${this.#rank.length} proxies with more than ${this.minVotes} EOS Voted`);
         this.#lastUpdateTime = Date.now();
         this.#rank = tempArray;
+        console.log(`${this.#rank.length} proxies with more than ${this.minVotes} EOS Voted`);
         localStorage.setItem('proxy_list_update', this.#lastUpdateTime);
         localStorage.setItem('proxies', JSON.stringify(this.rank));
     }

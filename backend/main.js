@@ -1,12 +1,10 @@
-const conf = require('./config.json');
 const fastify = require('fastify')({logger: false});
 const _ = require('lodash');
 const {User} = require('./models');
-const {JsonRpc} = require('eosjs');
-const fetch = require('node-fetch');
-const {VoteManager} = require("./vote_manager");
-const {ProxyAPI} = require("./proxy_api");
-const rpc = new JsonRpc(conf.endpoint, {fetch});
+
+fastify.register(require('./plugins/eosjs'));
+
+fastify.register(require('./plugins/EXVF-Modules'));
 
 // register public facing apis
 fastify.register(require('./handlers/users'), {
@@ -18,11 +16,7 @@ fastify.register(require('./handlers/admin'), {
     prefix: '/api'
 });
 
-const proxyApi = new ProxyAPI(conf, rpc);
-proxyApi.setScheduler();
-// proxyApi.update();
 
-const voteManager = new VoteManager(conf, rpc);
 
 const proxy_list = [];
 const proxy_votes = new Map();

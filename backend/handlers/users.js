@@ -1,11 +1,25 @@
+const {ProxyAPI} = require("../proxy_api");
 const {User} = require('../models');
-
+const conf = require('../config.json');
 const auth_handler = async (request, reply) => {
 
 };
 
+function parseRequestLimits(request) {
+    let skip = 0;
+    if (request.query.skip) {
+        skip = parseInt(request.query.skip);
+    }
+    let limit = 20;
+    if (request.query.limit) {
+        limit = parseInt(request.query.limit);
+    }
+    return {skip, limit};
+}
 
 async function routes(fastify, options) {
+
+    const {proxyApi, voteManager} = fastify['exvf'];
 
     // Get Auth Token
     fastify.route({
@@ -61,7 +75,10 @@ async function routes(fastify, options) {
     fastify.route({
         method: "GET",
         url: '/producers',
-        handler: auth_handler
+        handler: async (request, reply) => {
+            const {skip, limit} = parseRequestLimits(request);
+            reply.send({});
+        }
     });
 
     // Get Proxies
@@ -69,15 +86,8 @@ async function routes(fastify, options) {
         method: "GET",
         url: '/proxies',
         handler: async (request, reply) => {
-            let skip = 0;
-            if (request.query.skip) {
-                skip = parseInt(request.query.skip);
-            }
-            let limit = 20;
-            if (request.query.limit) {
-                limit = parseInt(request.query.limit);
-            }
-            return proxyApi.rank.slice(skip, skip + limit);
+            const {skip, limit} = parseRequestLimits(request);
+            reply.send(proxyApi.rank.slice(skip, skip + limit));
         }
     });
 
