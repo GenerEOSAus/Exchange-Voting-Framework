@@ -256,17 +256,3 @@ Note
 Replace **** with the associated account\_name/custom voting permission name
 
 Choose one from among [a|b]
-
-Recommended Security Practice for Key Management
-
-The following is a list of recommended Security Practice for Key Management.The options are sorted from highest security to lowest security. We will also explain detailed steps on setting up secure account permission and in a separate section we will point out common mistakes to avoid.
-
-Air-gapped cold signing-wallet
-
-Air-gapped cold signing-wallet (physically isolating the machine and disabling/removing all wired/wireless network interfaces + Faraday cage) to generate signed/verifiable transactions using the special custom permission vote key + hot broadcast-wallet for broadcasting transactions (no keys should be on this machine). Note this practice will require some physical removable transmission medium (e.g. disk drives) to copy across the signed transaction and broadcast it to the network. Will experience the highest latency.
-
-
-
-A single cold (private) signing and broadcast wallet.
-
-        etc…
