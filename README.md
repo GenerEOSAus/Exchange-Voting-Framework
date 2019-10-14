@@ -4,6 +4,10 @@ Developed by shEOS, EOS Rio, NodeONE, GenerEOS
 
 A framework for crypto exchanges to easily implement end-user voting for EOSIO-based blockchains into their existing exchange portal.
 
+If you have questions or feedback you can contact us via
+Telegram: https://t.me/EOSExchangeVotingTaskForce
+or Email: eosvotegroup@genereos.io
+
 
 ## Background
 
@@ -215,9 +219,7 @@ The following is a list of recommended Security Practice for Key Management. We 
 
 #### EOSIO permission system
 
-The active key….. Bla bla
-
-The owner key …. Bla blub
+By default an EOS account has an active permission and an owner permission.
 
 How to create a special vote permission and link it to your account
 
