@@ -32,6 +32,10 @@ class ProxyAPI {
         } else {
             if (!this.#producers) {
                 this.updateProds().catch(console.log);
+            } else {
+                if (this.#producers.length === 0) {
+                    this.updateProds().catch(console.log);
+                }
             }
         }
     }
@@ -161,8 +165,8 @@ class ProxyAPI {
         }
 
         console.log(`${tempArray2.length} producers registered`);
-        localStorage.setItem('producers', JSON.stringify(this.producers));
         this.#producers = tempArray2;
+        localStorage.setItem('producers', JSON.stringify(this.producers));
     }
 
     async update() {
