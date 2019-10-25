@@ -77,7 +77,7 @@ async function routes(fastify, options) {
         url: '/producers',
         handler: async (request, reply) => {
             const {skip, limit} = parseRequestLimits(request);
-            reply.send({});
+            reply.send(proxyApi.producers.slice(skip, skip + limit));
         }
     });
 
