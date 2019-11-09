@@ -8,7 +8,8 @@ import PageTemplate from './components/PageTemplate';
 
 import LoginPage from './pages/LoginPage';
 import WelcomePage from './pages/WelcomePage';
-import ProxyPage from './pages/ProxyPage';
+import VotingPage from './pages/VotingPage';
+
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
             <Route exact path="/login" component={LoginPage} />
             <ProtectedRoute  exact path="/" component={WelcomePage} />
             <ProtectedRoute  exact path="/home" component={WelcomePage} />          
-            <Route  exact path="/vote" component={ProxyPage} />
+            <Route  exact path="/vote" component={VotingPage} />
           </Switch>
         </PageTemplate>
       </AuthContextProvider>

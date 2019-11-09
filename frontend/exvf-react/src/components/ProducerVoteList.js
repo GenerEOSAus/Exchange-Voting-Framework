@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import DataTable from 'react-data-table-component';
-import { ProxyContext } from '../contexts/ProxyContext';
+import { ProducerContext } from '../contexts/ProducerContext';
 import '../flags.css'
 
-const ProxyVoteList = (props) => {
+const ProducerVoteList = (props) => {
 
-  const {proxyList, doSelectProxy} = useContext(ProxyContext);
+  const {producerList, doSelectProducer} = useContext(ProducerContext);
 
     //@TODO: data to be replaced with data from backend
     const data = [
@@ -49,18 +49,18 @@ const ProxyVoteList = (props) => {
     ];
 
     const handleProxySelection = (e) => {
-      doSelectProxy(e.target.value);
+      doSelectProducer(e.target.value);
     }
 
     return ( 
         <div className="proxy-vote-list">
-            <header>Proxy Candidates</header>
+            <header>Producer Candidates</header>
             <DataTable
                 columns={columns}
-                data={proxyList}
+                data={producerList}
             />
         </div>
      );
 }
  
-export default ProxyVoteList;
+export default ProducerVoteList;
