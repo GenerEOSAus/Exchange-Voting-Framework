@@ -1,12 +1,12 @@
 import React from 'react';
-import ProducerVoteList from '../components/ProducerVoteList';
-import ProducerContextProvider from '../contexts/ProducerContext';
-import ProducerVoteDetail from '../components/ProducerVoteDetail';
+import ProducerVoteList from '../../components/ProducerVoteList';
+import ProducerContextProvider from '../../contexts/ProducerContext';
+import ProducerVoteDetail from '../../components/ProducerVoteDetail';
 
-const ProducerPage = (props) => {
+const ProducerSection = (props) => {
     return ( 
         <ProducerContextProvider>
-            <div className="page_producer">
+            <div className="section_producer">
                 <div className="section-left">
                     <ProducerVoteList />
                 </div>
@@ -18,4 +18,4 @@ const ProducerPage = (props) => {
      );
 }
  
-export default ProducerPage;
+export default ProducerSection;

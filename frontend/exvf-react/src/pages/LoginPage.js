@@ -13,7 +13,7 @@ const LoginPage = (props) => {
     }
 
     return ( 
-        <div className="page_login">
+        <div className="page page_login">
             <div className="login-panel panel">
                 <header>Login</header>
                 <form onSubmit={handleSubmit}>

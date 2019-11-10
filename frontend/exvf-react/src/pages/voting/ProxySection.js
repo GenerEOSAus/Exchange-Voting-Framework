@@ -1,12 +1,12 @@
 import React from 'react';
-import ProxyVoteList from '../components/ProxyVoteList';
-import ProxyContextProvider from '../contexts/ProxyContext';
-import ProxyVoteDetail from '../components/ProxyVoteDetail';
+import ProxyVoteList from '../../components/ProxyVoteList';
+import ProxyContextProvider from '../../contexts/ProxyContext';
+import ProxyVoteDetail from '../../components/ProxyVoteDetail';
 
-const ProxyPage = (props) => {
+const ProxySection = (props) => {
     return ( 
         <ProxyContextProvider>
-            <div className="page_proxy">
+            <div className="section_proxy">
                 <div className="section-left">
                     <ProxyVoteList />
                 </div>
@@ -18,4 +18,4 @@ const ProxyPage = (props) => {
      );
 }
  
-export default ProxyPage;
+export default ProxySection;

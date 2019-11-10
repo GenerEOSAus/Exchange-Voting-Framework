@@ -2,12 +2,12 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
-import ProducerPage from './ProducerPage';
-import ProxyPage from './ProxyPage';
+import ProducerSection from './voting/ProducerSection';
+import ProxySection from './voting/ProxySection';
 
 const VotingPage = (props) => {
     return (
-        <div className="page-voting">
+        <div className="page page-voting">
             <Tabs>
                 <TabList>
                 <Tab>Producer</Tab>
@@ -15,10 +15,10 @@ const VotingPage = (props) => {
                 </TabList>
 
                 <TabPanel>
-                    <ProducerPage />
+                    <ProducerSection />
                 </TabPanel>
                 <TabPanel>
-                    <ProxyPage />
+                    <ProxySection />
                 </TabPanel>
             </Tabs>
         </div>
