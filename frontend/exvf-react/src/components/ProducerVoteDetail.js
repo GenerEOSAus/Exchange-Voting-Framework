@@ -1,24 +1,31 @@
 import React, { useContext } from 'react';
 import { ProducerContext } from '../contexts/ProducerContext';
+import '../flags.css'
 
 const ProducerVoteDetail = (props) => {
-    const proxy = useContext(ProducerContext).selectedProducerDetail;
-    console.log(proxy)
-    if(proxy != null) {
+    const producer = useContext(ProducerContext).selectedProducerDetail;
+    console.log("Producer Vote Detail Showing: ", producer)
+    if(producer != null) {
         return ( 
-            <div className="proxy-vote-list">
+            <div className="producer-vote-detail">
                 <div className="displaypic">
-                    <img src={proxy.logo} width="100"/>
+                    <img src={producer.logo} width="100" alt="logo"/>
                 </div>
-                <div className="proxyName">
-                    {proxy.name}
+                <div className="producerName">
+                    
                 </div>
-                <div className="proxyUrl">
-                    {proxy.url}
+                <div className="producerUrl">
+                    <a href={producer.url} target="_blank">{producer.url}</a>
                 </div>
-                <div className="proxyDescription panel">
+                <div className="producerVotes">
+                    Rank: {producer.rank}, Votes: {producer.votes}
+                </div>
+                <div className="producerCountry">
+                    Country: {producer.country} <span className={`flag-icon flag-icon-${producer.country?producer.country.toLowerCase():''}`} />
+                </div>
+                <div className="producerDescription panel">
                     <header>Voting Philosophy</header>
-                    {proxy.description}
+                    {producer.description}
                 </div>
                 
                 <button onClick={()=>console.log('TODO: call voting')}>Vote</button>

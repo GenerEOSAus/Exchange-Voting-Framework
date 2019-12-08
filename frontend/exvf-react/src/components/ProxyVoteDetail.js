@@ -3,22 +3,27 @@ import { ProxyContext } from '../contexts/ProxyContext';
 
 const ProxyVoteDetail = (props) => {
     const proxy = useContext(ProxyContext).selectedProxyDetail;
-    console.log(proxy)
+    console.log("Proxy Vote Detail Showing: ", proxy)
     if(proxy != null) {
         return ( 
-            <div className="proxy-vote-list">
+            <div className="proxy-vote-detail">
+                <h3>{proxy.info.name}</h3>
                 <div className="displaypic">
-                    <img src={proxy.logo} width="100"/>
+                    <img src={proxy.info.logo_256} width="100"/>
                 </div>
                 <div className="proxyName">
-                    {proxy.name}
+                    {proxy.info.slogan}
                 </div>
                 <div className="proxyUrl">
-                    {proxy.url}
+                    <a href={proxy.info.website} target="_blank">{proxy.info.website}</a>
+                </div>
+                <div className="proxyBackground panel">
+                    <header>Background</header>
+                    {proxy.info.background}
                 </div>
                 <div className="proxyDescription panel">
                     <header>Voting Philosophy</header>
-                    {proxy.description}
+                    {proxy.info.philosophy}
                 </div>
                 
                 <button onClick={()=>console.log('TODO: call voting')}>Vote</button>
