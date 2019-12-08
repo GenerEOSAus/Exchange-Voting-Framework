@@ -16,7 +16,12 @@ fastify.register(require('./handlers/admin'), {
     prefix: '/api'
 });
 
-
+//@TODO: for dev, allow for CORS - to remove in prod
+fastify.register(require('fastify-cors'), { 
+    // put your options here
+    //https://www.npmjs.com/package/fastify-cors
+    // origin: ["http://localhost:8080"]
+})
 
 const proxy_list = [];
 const proxy_votes = new Map();
